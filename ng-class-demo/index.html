@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Referencing the App module with the ngApp directive. -->
+<html ng-app="todoApp" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TaskList</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Referencing the controller within this section element as todoC. -->
+  <section ng-controller="TodoController as todoC">
+
+
+
+    <!-- <section ng-class="{item.completed === 'true'}"></section> -->
+    <div class="input">
+      <h2>TODOLIST</h2>
+      <h3>A place to store the things you have to do</h3>
+      <input type="text" placeholder="Fliter your to-dos" ng-model="searchtask.task">
+
+      <div class="container" ng-repeat="item in todoC.todoList | filter:searchtask">
+        <form ng-submit="todoC.addItem(todoC.item.task, intro.item.completed);">
+          <button id="button" ng-click="todoC.completeTask($index);" ng-if="item.completed === false">Complete</button>
+          <p ng-class="{ 'finish': item.completed === true , 'notfinish': item.completed === false}"> {{item.task}}
+          </p>
+        </form>
+        <i  ng-click="todoC.removeList($index);" class="material-icons">clear</i>
+      </div>
+
+      <input type="text" placeholder="Add your to-dos" ng-model="todoC.todoList.task"> 
+      <button class="button" ng-click="todoC.addList(todoC.todoList.task);" >SAVE</button>
+    </div>
+
+  </section>
+
+
+
+  <!-- <section ng-class="{ 'sibling': person.relation === 'sibling', 'uncle': person.relation === 'uncle', 'grandpa': person.relation === 'grandpa' }"> -->
+
+
+
+
+
+
+
+  <!-- Linking our scripts. -->
+  <script src="https://code.angularjs.org/1.6.5/angular.min.js"></script>
+  <script src="module.js"></script>
+  <script src="task-ctrl.js"></script>
+</body>
+
+</html>
